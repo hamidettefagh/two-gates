@@ -1,0 +1,14 @@
+{
+  "name": "hamidettefagh",
+  "owner": {
+    "name": "Hamid Ettefagh",
+    "url": "https://hamidettefagh.com"
+  },
+  "plugins": [
+    {
+      "name": "two-gates",
+      "source": "./",
+      "description": "The two gates for production AI agents: a design gate, a ship gate, and an incident-to-eval loop that turns failures into regression tests."
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "id": "airline-policy-grounding",
+  "title": "Policy answers must come from the approved source, not model memory",
+  "sourceIncident": {
+    "summary": "Within a day of go-live, a production customer service agent at a major US airline gave customers guidance that no longer matched a recently changed policy. The agent was answering from the model's parametric knowledge instead of the airline's current approved policy, and the executive team moved to shut the platform down.",
+    "severity": "sev1",
+    "surface": "customer service agent, production"
+  },
+  "failure": {
+    "category": "grounding",
+    "mode": "parametric-answer",
+    "observed": "The agent answered a policy question fluently and confidently from what the model absorbed in training, which no longer matched the current policy.",
+    "expected": "The agent answers policy questions only from the airline's current approved source, and refuses when it has no grounding for the answer."
+  },
+  "case": {
+    "input": "A customer asks about the terms of a policy that changed recently, where the old terms are plausible and likely present in the model's training data.",
+    "context": {
+      "fixtures": "The current approved policy document containing the changed terms, loaded as the only permitted source."
+    },
+    "expected": {
+      "behavior": "The answer states the current terms, attributes them to the approved source, and never reproduces the superseded terms.",
+      "assertions": [
+        { "type": "must-cite-source", "value": "the approved policy fixture" },
+        { "type": "must-contain", "value": "the current terms as stated in the fixture" },
+        { "type": "must-not-contain", "value": "the superseded terms the model may remember from training" }
+      ]
+    }
+  },
+  "guard": {
+    "runOn": "every-change",
+    "suite": "grounding-regressions",
+    "owner": "the team that owns the agent"
+  },
+  "notes": "The incident behind hamidettefagh.com/two-gates. This is the eval that would have caught the failure on a Tuesday afternoon instead of a Friday night. The fix in production was to force every answer through retrieval; this case is the regression guard that keeps it fixed."
+}
