@@ -47,13 +47,13 @@ The honesty of the verdict is the honesty of this step. The script cannot check 
 
 ### Step 3: Run the deterministic verdict
 
-Pass the seven signals to the engine. It returns the verdict, the shape, and the knowledge, human-oversight, model, and risk guidance. Do not paraphrase the logic from memory or re-derive the verdict yourself. Running it is the whole point: the same signals must always produce the same answer. Run it from the skill's own directory, the folder that holds SKILL.md, or pass the absolute path to `scripts/decide.mjs`.
+Pass the seven signals to the engine. It returns the verdict, the shape, and the knowledge, human-oversight, model, and risk guidance. Do not paraphrase the logic from memory or re-derive the verdict yourself. Running it is the whole point: the same signals must always produce the same answer. The `${CLAUDE_SKILL_DIR}` placeholder resolves to this skill's install directory.
 
 ```bash
-node scripts/decide.mjs '{"q1":"...","q2":"...","q3":"...","q4":"...","q5":"...","q6":"...","q7":"..."}'
+node ${CLAUDE_SKILL_DIR}/scripts/decide.mjs '{"q1":"...","q2":"...","q3":"...","q4":"...","q5":"...","q6":"...","q7":"..."}'
 ```
 
-Add `--md` for a ready-to-quote markdown block. Run `node scripts/decide.mjs --questions` to see every option id. The rules the engine applies are documented in `references/decision-logic.md` if you need to explain a verdict.
+Add `--md` for a ready-to-quote markdown block. Run `node ${CLAUDE_SKILL_DIR}/scripts/decide.mjs --questions` to see every option id. The rules the engine applies are documented in `references/decision-logic.md` if you need to explain a verdict.
 
 If the design lives on Salesforce, add `--platform agentforce`. The classification never changes; the lens renders the same verdict in platform vocabulary: a Flow instead of a workflow, a prompt template instead of a single call, an Agentforce topic with actions instead of an agent with tools, multiple agents behind an orchestrator instead of multi-agent. Use it whenever the user is deciding between a Flow, a prompt template, and an agent.
 

@@ -48,16 +48,16 @@ Map the incident to one primary failure mode from `references/failure-taxonomy.m
 
 Write the case as a single JSON document in the format defined by `references/eval-case-schema.md`: the source incident, the classified failure, the smallest reproducing input, the expected behavior with assertions, and the guard that says when it runs.
 
-- Start from the template: `node scripts/validate-eval.mjs --template`.
+- Start from the template: `node ${CLAUDE_SKILL_DIR}/scripts/validate-eval.mjs --template`.
 - The input must be the smallest thing that reproduces the failure, with fixtures in `case.context` rather than prose promises.
 - Assert at the level the failure lives: sources and facts for grounding, calls for tool-use, end states for reasoning. Use `human-review` only when nothing sharper exists.
 - Then validate. This is not optional and not a formality:
 
 ```bash
-node scripts/validate-eval.mjs the-case.json
+node ${CLAUDE_SKILL_DIR}/scripts/validate-eval.mjs the-case.json
 ```
 
-Run it from the skill's own directory, or pass the absolute path to the script. Do not hand-check the format and declare it valid; the validator is deterministic and its errors are exact. Fix and re-run until it passes. Add `--md` for a summary block ready to paste into the postmortem or the PR.
+The `${CLAUDE_SKILL_DIR}` placeholder resolves to this skill's install directory. Do not hand-check the format and declare it valid; the validator is deterministic and its errors are exact. Fix and re-run until it passes. Add `--md` for a summary block ready to paste into the postmortem or the PR.
 
 ### Step 4: Wire the guard
 

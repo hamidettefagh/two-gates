@@ -2,6 +2,8 @@
 
 Nine categories of production agent failure, the modes inside each, and the eval each mode owes you. Classify the incident to one primary mode. If two fit, pick the one closest to the root cause and note the other; do not force a tie.
 
+Contents: [grounding](#grounding), [retrieval](#retrieval), [tool-use](#tool-use), [reasoning](#reasoning), [context](#context), [guardrail](#guardrail), [freshness](#freshness), [escalation](#escalation), [coordination](#coordination), and [when more than one fits](#when-more-than-one-fits).
+
 A rule that holds throughout: classify from evidence in the incident, not from what would be convenient to test. The most common misclassification is calling something a model problem when the trace shows a grounding, retrieval, or context problem.
 
 ---
