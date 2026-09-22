@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "two-gates",
   "description": "The two gates for production AI agents. A design gate that decides what to build (agent, workflow, or a single call, with an Agentforce lens), a ship gate that proves it is ready across seven dimensions, and an incident-to-eval loop that turns production failures into regression tests. The verdicts and the eval format are deterministic code, not model judgment.",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "author": {
     "name": "Hamid Ettefagh",
     "url": "https://hamidettefagh.com"

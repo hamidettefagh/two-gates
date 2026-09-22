@@ -22,7 +22,7 @@ design gate -> build -> ship gate -> run -> incident
 
 | Skill | Gate | What it does |
 |---|---|---|
-| `/two-gates:design-gate` | Before you build | Reads a PRD, ticket, or use case and decides the shape: workflow, hybrid, single model call, single agent with tools, or multi-agent. Includes an Agentforce lens (Flow, prompt template, topic, or agents behind an orchestrator). Writes an architecture decision record. |
+| `/two-gates:design-gate` | Before you build | Reads a PRD, ticket, or use case and decides the shape: workflow, hybrid, single model call, single agent with tools, or multi-agent. Includes an Agentforce lens (Flow, prompt template, Agent Script, topic, or Multi-Agent Orchestration). Writes an architecture decision record. |
 | `/two-gates:ship-gate` | Before you run | Reviews a built agent across seven dimensions: evaluation, cost, observability, guardrails, human oversight, reliability, governance. Scores it out of 28 and returns the gaps in priority order. |
 | `/two-gates:incident-to-eval` | When it breaks anyway | Turns a production incident into a golden eval case: classifies the failure against a nine-category taxonomy and writes a portable regression test any runner can enforce. |
 
