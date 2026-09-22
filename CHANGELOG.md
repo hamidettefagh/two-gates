@@ -7,6 +7,7 @@ Users receive plugin updates only when the version in `.claude-plugin/plugin.jso
 - The design gate's Agentforce lens is current with the platform as of September 2026. The hybrid verdict now splits on surface: conversational work pins its load-bearing decisions in Agent Script, using availability gates and conditional instructions the model cannot override, while backend work has no agent to script and stays a Flow that calls a prompt template at the judgment points.
 - The single agent verdict names Agent Script as where the topic is defined, so the guardrails and transitions are reviewable and the execution topology is known before a conversation starts.
 - The multi-agent verdict is named Multi-Agent Orchestration, matching the shipped product.
+- The design gate's trigger description names Agent Script and Multi-Agent Orchestration, so a question phrased in those terms reaches the skill.
 - The classification is unchanged. The surface split affects wording and the diagram only, never the shape, and never leaks into the general lens. The golden suite is now 37 checks and covers both branches, plus the diagram vocabulary each verdict implies.
 
 ## 1.1.0, 2026-07-16
