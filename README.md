@@ -18,6 +18,8 @@ design gate -> build -> ship gate -> run -> incident
 /plugin install two-gates@hamidettefagh
 ```
 
+It is also listed in Anthropic's plugin directory. In the Claude apps, open Plugins, then Discover, and search `two-gates`.
+
 ## The three skills
 
 | Skill | Gate | What it does |
