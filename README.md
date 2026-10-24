@@ -37,6 +37,17 @@ node skills/design-gate/scripts/decide.mjs --questions
 node skills/incident-to-eval/scripts/validate-eval.mjs --template
 ```
 
+## What it runs
+
+The plugin adds no network access of its own. It has no hooks, no MCP servers, no telemetry, and no packages to install. It reads no environment variables and never asks for a credential.
+
+Two of the skills tell Claude to run a local Node script that uses only Node's built-in modules:
+
+- `decide.mjs`, in the design gate, reads the seven answers you give it, as JSON on the command line or from a file named with `--file`, and prints the verdict. It writes nothing.
+- `validate-eval.mjs`, in incident-to-eval, reads the eval case file you name and prints whether it is valid, listing each problem it finds. It writes nothing.
+
+Each script has a golden test suite beside it, `test.mjs`, which runs the script as a child process. The incident-to-eval suite writes its fixtures to a temporary directory it creates and then deletes; nothing else in the plugin writes a file. The ship gate is instructions and a rubric, with no script. The two scripts need Node.js; everything else is Markdown.
+
 ## Receipts
 
 Every gate carries a worked example from the same real engagement, a major US airline's production customer service agent: the [architecture decision record](skills/design-gate/assets/example-decision-record.md), the [readiness review](skills/ship-gate/assets/example-review.md) as it would have run the week before the go-live incident, and the [eval case](skills/incident-to-eval/assets/example-airline-grounding.json) that would have caught that incident on a Tuesday afternoon instead of a Friday night. The full story is in the [case study](https://hamidettefagh.com/work/airline-super-agent).
