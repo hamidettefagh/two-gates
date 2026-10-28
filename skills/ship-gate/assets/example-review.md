@@ -29,7 +29,7 @@ Ordered by risk to this specific agent, not by how easy they are to fix.
 ## What is already solid
 
 - Human oversight has a real escalation path, which is the seed the confirmation gate can build on.
-- The team knows the three request domains cleanly, which is what later made splitting into delegate agents behind an orchestrator straightforward.
+- The team knows its request domains cleanly, which later made it clear which work needed its own agent and which did not.
 
 ---
 

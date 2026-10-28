@@ -2,6 +2,12 @@
 
 Users receive plugin updates only when the version in `.claude-plugin/plugin.json` changes, so every user-visible change bumps the version and gets a line here.
 
+## 1.2.2, 2026-10-27
+
+- The incident-to-eval worked example now reproduces the incident it is named for. The airline agent skipped its knowledge lookup only on follow-up questions, so the case is a two-turn conversation that asserts the lookup is called on the follow-up (`must-call-tool`); the old single-question version would most likely have passed against the agent that failed. It is classified to the first failure in the chain, `context / buried-instruction`, with the customer-facing grounding failure noted downstream, as the taxonomy's own rule requires.
+- The worked examples tell the weekend fix accurately: tighter grounding instructions held the launch, and enforcing retrieval in the path is the lasting fix still to come, not something already done.
+- The design gate's decision record and the ship gate's review describe the design that was chosen: one coordinator that answers questions itself and a single back-office delegate, split on the verified-session boundary.
+
 ## 1.2.1, 2026-10-27
 
 - The worked examples no longer carry a detail that could identify the engagement: the airline's request domains now read loyalty, reservations, and back-office, matching the case study.

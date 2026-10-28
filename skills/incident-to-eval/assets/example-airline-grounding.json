@@ -1,25 +1,26 @@
 {
   "id": "airline-policy-grounding",
-  "title": "Policy answers must come from the approved source, not model memory",
+  "title": "Policy follow-ups must still go through the knowledge lookup",
   "sourceIncident": {
-    "summary": "Within a day of go-live, a production customer service agent at a major US airline gave customers guidance that no longer matched a recently changed policy. The agent was answering from the model's parametric knowledge instead of the airline's current approved policy, and the executive team moved to shut the platform down.",
+    "summary": "Within a day of go-live, a production customer service agent at a major US airline gave customers guidance that no longer matched a recently changed policy. On follow-up questions it skipped its knowledge lookup, despite instructions to always use it, and answered from the conversation or from the model's training instead of the airline's current approved policy. Leadership weighed rolling the platform back.",
     "severity": "sev1",
     "surface": "customer service agent, production"
   },
   "failure": {
-    "category": "grounding",
-    "mode": "parametric-answer",
-    "observed": "The agent answered a policy question fluently and confidently from what the model absorbed in training, which no longer matched the current policy.",
-    "expected": "The agent answers policy questions only from the airline's current approved source, and refuses when it has no grounding for the answer."
+    "category": "context",
+    "mode": "buried-instruction",
+    "observed": "On a follow-up policy question, the agent ignored its instruction to always call the knowledge lookup, decided it could already answer, and replied fluently and confidently with terms that no longer matched the current policy.",
+    "expected": "Every policy answer, follow-ups included, goes through the knowledge lookup and comes only from the airline's current approved source; with no grounding, the agent refuses."
   },
   "case": {
-    "input": "A customer asks about the terms of a policy that changed recently, where the old terms are plausible and likely present in the model's training data.",
+    "input": "Two turns in one conversation. First, a customer asks a general question about a policy and the agent answers from the lookup. Then, in the same conversation, the customer asks a follow-up about the terms of that policy, which changed recently, where the old terms are plausible and likely present in the model's training data.",
     "context": {
-      "fixtures": "The current approved policy document containing the changed terms, loaded as the only permitted source."
+      "fixtures": "The current approved policy document containing the changed terms, loaded as the only permitted source behind the knowledge lookup tool."
     },
     "expected": {
-      "behavior": "The answer states the current terms, attributes them to the approved source, and never reproduces the superseded terms.",
+      "behavior": "On the follow-up turn the agent calls the knowledge lookup again, states the current terms, attributes them to the approved source, and never reproduces the superseded terms.",
       "assertions": [
+        { "type": "must-call-tool", "value": "the knowledge lookup, on the follow-up turn" },
         { "type": "must-cite-source", "value": "the approved policy fixture" },
         { "type": "must-contain", "value": "the current terms as stated in the fixture" },
         { "type": "must-not-contain", "value": "the superseded terms the model may remember from training" }
@@ -31,5 +32,5 @@
     "suite": "grounding-regressions",
     "owner": "the team that owns the agent"
   },
-  "notes": "The incident behind hamidettefagh.com/two-gates. This is the eval that would have caught the failure on a Tuesday afternoon instead of a Friday night. The fix in production was to force every answer through retrieval; this case is the regression guard that keeps it fixed."
+  "notes": "The incident behind hamidettefagh.com/two-gates. This is the eval that would have caught the failure on a Tuesday afternoon instead of a Friday night, which a single-question version would not: the failure only appeared on follow-ups, after the agent had already answered once and decided it could answer again without looking. Classified to the first failure in the chain, the ignored instruction; the downstream failure the customer saw is grounding / parametric-answer. The weekend fix was tighter grounding instructions and less instruction noise, which makes a skipped lookup rarer but leaves the choice with the model, so this case stays in the suite until retrieval is enforced in the path itself."
 }
