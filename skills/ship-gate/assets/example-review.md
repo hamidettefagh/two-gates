@@ -11,11 +11,11 @@ A worked example. This is the review as it would have run the week before the go
 | Dimension | Score | What I saw |
 |---|---|---|
 | Evaluation | 1/4 | A demo suite of happy-path questions. No eval set for policy grounding, so a fluent wrong answer passes. This is why the failure was invisible until customers hit it. |
-| Cost | 2/4 | Model is oversized for the volume and cost per resolved case is not tracked, only cost per call. Affordable in the demo, not at hundreds of thousands of actions a week. |
+| Cost | 2/4 | Model is oversized for the volume and cost per resolved case is not tracked, only cost per call. Affordable in the demo, not at production volume. |
 | Observability | 1/4 | A key KPI is computed by a layer that returns numbers nobody can reconcile. There is no trustworthy read on what the agent is doing in production. |
 | Guardrails | 1/4 | Nothing forces answers through the airline's approved source. The agent can and does answer from parametric knowledge, including on a policy that recently changed. |
 | Human oversight | 2/4 | There is an escalation path, but no confirmation gate in front of the irreversible, customer-facing actions. |
-| Reliability | 2/4 | One monolithic agent holds loyalty, baggage, and back-office. A fault in one path degrades all three, and there is no isolation between them. |
+| Reliability | 2/4 | One monolithic agent holds loyalty, reservations, and back-office. A fault in one path degrades all three, and there is no isolation between them. |
 | Governance | 2/4 | Federally regulated customer data flows through the platform without an explicit trust boundary, so the blast radius of a mistake is undefined. |
 
 ## Gaps to close, in priority order

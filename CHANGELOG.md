@@ -2,6 +2,11 @@
 
 Users receive plugin updates only when the version in `.claude-plugin/plugin.json` changes, so every user-visible change bumps the version and gets a line here.
 
+## 1.2.1, 2026-10-27
+
+- The worked examples no longer carry a detail that could identify the engagement: the airline's request domains now read loyalty, reservations, and back-office, matching the case study.
+- The examples' volume figures match the verified evidence: more than 120,000 automated actions a week in the design gate's decision record, and production volume in the ship gate's review, in place of hundreds of thousands.
+
 ## 1.2.0, 2026-09-22
 
 - The design gate's Agentforce lens is current with the platform as of September 2026. The hybrid verdict now splits on surface: conversational work pins its load-bearing decisions in Agent Script, using availability gates and conditional instructions the model cannot override, while backend work has no agent to script and stays a Flow that calls a prompt template at the judgment points.
